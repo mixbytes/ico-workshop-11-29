@@ -46,7 +46,7 @@ contract Crowdsale is Ownable {
             msg.sender.transfer(msg.value);
         }
         else {
-            assert(now >= c_start_time && now <= c_end_time);
+            assert((msg.sender == owner || now >= c_start_time) && now <= c_end_time);
 
             uint tokens = msg.value.mul(c_tokens_per_wei);
 
