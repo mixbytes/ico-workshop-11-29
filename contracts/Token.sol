@@ -6,7 +6,7 @@ import 'zeppelin-solidity/contracts/token/StandardToken.sol';
 contract Token is StandardToken {
 
     function Token(){
-        balances[msg.sender] = uint(10e9) * (uint(10) ** uint(decimals));
+        balances[msg.sender] = uint(1e9) * (uint(10) ** uint(decimals));
     }
 
     string public constant name = "Workshop token";
