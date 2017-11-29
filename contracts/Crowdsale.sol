@@ -61,6 +61,14 @@ contract Crowdsale is Ownable {
         // WRITE ME
     }
 
+    function pause()
+        public
+        onlyOwner
+        requiresState(State.RUNNING)
+    {
+        changeState(State.PAUSE);
+    }
+
 
     // INTERNAL
 
