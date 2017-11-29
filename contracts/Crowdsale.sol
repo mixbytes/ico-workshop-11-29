@@ -54,6 +54,13 @@ contract Crowdsale is Ownable {
         }
     }
 
+    function withdraw()
+        public
+        requiresState(State.FAILED)
+    {
+        // WRITE ME
+    }
+
 
     // INTERNAL
 
@@ -74,7 +81,21 @@ contract Crowdsale is Ownable {
     }
 
     function finish() internal {
-        assert(false);
+        assert(now >= c_end_time);
+
+        if (this.balance >= c_soft_cap) {
+            changeState(State.SUCCEEDED);
+            owner.transfer(this.balance);
+
+            uint tokens_sold = m_token.total().sub(m_token.balanceOf(this));
+            uint tokens_for_owner = tokens_sold.mul(20).div(80);
+            m_token.transfer(owner, tokens_for_owner);
+
+            m_token.burn();
+        }
+        else {
+            changeState(State.FAILED);
+        }
     }
 
 
