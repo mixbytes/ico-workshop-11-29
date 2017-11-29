@@ -25,7 +25,7 @@ contract Crowdsale is Ownable {
 
     // PUBLIC
 
-    function Crowdsale(){
+    function Crowdsale() public {
         m_token = new Token();
     }
 

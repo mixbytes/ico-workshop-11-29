@@ -5,7 +5,7 @@ import 'zeppelin-solidity/contracts/token/StandardToken.sol';
 
 contract Token is StandardToken {
 
-    function Token(){
+    function Token() public {
         balances[msg.sender] = uint(1e9) * (uint(10) ** uint(decimals));
     }
 
