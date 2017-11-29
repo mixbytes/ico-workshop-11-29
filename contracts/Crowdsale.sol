@@ -37,8 +37,9 @@ contract Crowdsale is Ownable {
         public
         payable
         timedStateChange
-        requiresState(State.RUNNING)
     {
+        require(msg.sender == owner || m_state == State.RUNNING);
+
         // msg.sender sends msg.value ether
         if (now > c_end_time) {
             finish();
@@ -66,7 +67,7 @@ contract Crowdsale is Ownable {
         onlyOwner
         requiresState(State.RUNNING)
     {
-        changeState(State.PAUSE);
+        changeState(State.PAUSED);
     }
 
 
