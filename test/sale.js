@@ -21,11 +21,11 @@ contract('Crowdsale', function(accounts) {
         const instance = await Sale.new({from: role.owner});
         const token = Token.at(await instance.m_token());
 
-        const balance = await token.balanceOf(role.owner);
+        const balance = await token.balanceOf(role.investor1);
         assert(balance == 0);
 
-        await instance.sendTransaction({from: role.owner, value: web3.toWei(10, 'finney')});
+        await instance.sendTransaction({from: role.investor1, value: web3.toWei(10, 'finney')});
 
-        assert((await token.balanceOf(role.owner)) > 0);
+        assert((await token.balanceOf(role.investor1)) == 0); // sale is over
     });
 });
